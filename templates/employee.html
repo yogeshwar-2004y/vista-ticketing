@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VISTA-TICKETING</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='emp.css') }}">
+    <script>
+        function validateForm() {
+            const fname = document.getElementById('fname').value;
+            const eid = document.getElementById('eid').value;
+            const eiss = document.getElementById('eiss').value;
+            const edate = document.getElementById('edate').value;
+            const etime = document.getElementById('etime').value;
+
+         if (!fname || !eid || !eiss || !edate || !etime) {
+              alert('All fields are required!');
+              return false;
+              }
+           return true;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>IT - TICKETING</h2>
+        <form action="{{ url_for('submit') }}" method="post" onsubmit="return validateForm()">
+            <label for="fname">EMPLOYEE-NAME</label>
+            <input type="text" id="fname" name="fname" required><br><br>
+            <label for="eid">EMPLOYEE-ID</label>
+            <input type="number" id="eid" name="eid" required><br><br>
+            <label for="eiss">ISSUE</label>
+            <input type="text" id="eiss" name="eiss" required><br><br>
+            <label for="edate">DATE</label>
+            <input type="date" id="edate" name="edate" required><br><br>
+            <label for="etime">SELECT TIME</label>
+            <input type="time" id="etime" name="etime" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
