@@ -1,0 +1,7 @@
+Jinja2==3.1.2
+opencv-python==4.7.0.72
+openpyxl==3.1.4
+python-multipart==0.0.9
+Flask==3.0.3
+email_validator==2.1.1
+matplotlib==3.9.0

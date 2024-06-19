@@ -47,7 +47,8 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-input[type="time"] {
+input[type="time"],
+input[type="email"] {
     padding: 0.5rem;
     margin-bottom: 1rem;
     border: 1px solid #ddd;

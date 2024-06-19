@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VISTA-TICKETING</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='emp.css') }}">
+    <link rel="stylesheet" href="../static/emp.css">
     <script>
         function validateForm() {
             const fname = document.getElementById('fname').value;
             const eid = document.getElementById('eid').value;
+            const email = document.getElementById('email').value;
             const eiss = document.getElementById('eiss').value;
             const edate = document.getElementById('edate').value;
             const etime = document.getElementById('etime').value;
 
-            if (!fname || !eid || !eiss || !edate || !etime) {
+            if (!fname || !eid || !email || !eiss || !edate || !etime) {
                 alert('All fields are required!');
                 return false;
             }

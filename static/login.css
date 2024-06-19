@@ -32,8 +32,6 @@ form {
     opacity: 0;
     transform: translateY(20px);
     animation: slideIn 1s forwards 0.5s;
-    animation-delay: 0.5s;
-    animation-fill-mode: forwards;
 }
 
 /* Label styling */
@@ -43,10 +41,11 @@ label {
     display: block;
     opacity: 0;
     transform: translateX(-20px);
-    animation: slideInLeft 1s forwards 1s;
+    animation: slideInLeft 1s forwards 0.8s; /* Adjusted animation delay */
 }
 
 /* Input field styling */
+input[type="text"],
 input[type="number"] {
     width: calc(100% - 22px);
     padding: 10px;
@@ -56,7 +55,7 @@ input[type="number"] {
     outline: none;
     opacity: 0;
     transform: translateX(20px);
-    animation: slideInRight 1s forwards 1.2s;
+    animation: slideInRight 1s forwards 1s; /* Adjusted animation delay */
 }
 
 /* Submit button styling */
@@ -71,7 +70,7 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
-    animation: slideIn 1s forwards 1.5s;
+    animation: slideIn 1s forwards 1.2s; /* Adjusted animation delay */
 }
 
 input[type="submit"]:hover {
