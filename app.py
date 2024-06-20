@@ -218,4 +218,4 @@ def admin():
     return render_template('admin.html', rows=rows, columns=columns, pie_chart=pie_chart_filename)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5500')
+    app.run(host='0.0.0.0', port='5000')
