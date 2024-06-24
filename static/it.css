@@ -66,9 +66,6 @@ th {
     text-transform: uppercase;
 }
 
-td {
-    background-color: #444;
-}
 
 .action-cell {
     display: flex;
