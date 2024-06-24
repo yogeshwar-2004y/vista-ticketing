@@ -5,44 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thank You!</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 400px;
-            width: 100%;
-        }
-        h1 {
-            color: #333;
-        }
-        p {
-            color: #666;
-            margin-bottom: 20px;
-        }
-        a {
-            display: inline-block;
-            background-color: #007bff;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
+        /* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: hsl(0, 0%, 5%);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden; /* Prevents scroll bars from appearing */
+}
+
+/* Container styling */
+.container {
+    background-color: hsl(260, 20%, 97%);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards;
+}
+
+/* Header styling */
+h1 {
+    color: #333;
+    margin: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards 0.2s;
+}
+
+/* Paragraph styling */
+p {
+    color: #666;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards 0.4s;
+}
+
+/* Link styling */
+a {
+    display: inline-block;
+    background-color: #8be67b;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards 0.6s;
+}
+
+a:hover {
+    background-color: #07ac1d;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
     </style>
 </head>
 <body>
@@ -50,7 +85,7 @@
         <h1>Thank You!</h1>
         <p>Your ticket has been successfully updated.</p>
         <p>We'll get back to you soon.</p>
-        <a href="/">Back to IT Support Page</a>
+        <a href="/">Back to Home Page</a>
     </div>
 </body>
 </html>

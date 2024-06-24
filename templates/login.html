@@ -20,10 +20,17 @@
             // Animation trigger on DOMContentLoaded
             const h2 = document.querySelector('h2');
             const formElements = document.querySelectorAll('form > *');
+            const headingText = h2.textContent;
+            h2.innerHTML = '';
+
+            headingText.split('').forEach((letter, index) => {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                h2.appendChild(span);
+            });
 
             setTimeout(() => {
                 h2.style.opacity = '1';
-                h2.style.transform = 'translateY(0)';
             }, 200);
 
             formElements.forEach((el, index) => {

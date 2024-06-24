@@ -3,21 +3,21 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #000000;
 }
 
 .container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #615a5a;
+    box-shadow: 0 0 10px hsla(0, 100%, 99%, 0.873);
 }
 
 h1, h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
+    color: hsl(99, 98%, 49%);
 }
 
 /* Pie chart styling */
@@ -29,7 +29,7 @@ h1, h2 {
 .chart-container img {
     max-width: 100%;
     height: auto;
-    border: 1px solid #ccc;
+    border: 1px solid hwb(0 24% 76%);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 

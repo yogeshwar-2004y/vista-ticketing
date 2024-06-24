@@ -1,7 +1,7 @@
 /* General body styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(to right,hwb(0 31% 69%),hsl(0, 0%, 0%));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,17 +9,29 @@ body {
     margin: 0;
     color: #fff;
     overflow: hidden; /* Prevents scroll bars from appearing */
+    flex-direction: column;
 }
 
 /* Header styling */
 h2 {
     margin-bottom: 20px;
-    font-size: 24px;
+    font-size: 2em;
     text-align: center;
     opacity: 0;
-    transform: translateY(-20px);
     animation: fadeIn 1s forwards;
+    animation-delay: 0.5s;
 }
+
+h2 span {
+    display: inline-block;
+    opacity: 0;
+    animation: letterFadeIn 0.5s forwards;
+}
+
+h2 span:nth-child(1) { animation-delay: 0.1s; }
+h2 span:nth-child(2) { animation-delay: 0.2s; }
+h2 span:nth-child(3) { animation-delay: 0.3s; }
+/* ...add more nth-child rules for each letter */
 
 /* Form styling */
 form {
@@ -31,7 +43,7 @@ form {
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
-    animation: slideIn 1s forwards 0.5s;
+    animation: slideIn 1s forwards 1.5s;
 }
 
 /* Label styling */
@@ -41,7 +53,7 @@ label {
     display: block;
     opacity: 0;
     transform: translateX(-20px);
-    animation: slideInLeft 1s forwards 0.8s; /* Adjusted animation delay */
+    animation: slideInLeft 1s forwards 1.8s;
 }
 
 /* Input field styling */
@@ -55,7 +67,7 @@ input[type="number"] {
     outline: none;
     opacity: 0;
     transform: translateX(20px);
-    animation: slideInRight 1s forwards 1s; /* Adjusted animation delay */
+    animation: slideInRight 1s forwards 2s;
 }
 
 /* Submit button styling */
@@ -70,7 +82,7 @@ input[type="submit"] {
     transition: background-color 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
-    animation: slideIn 1s forwards 1.2s; /* Adjusted animation delay */
+    animation: slideIn 1s forwards 2.2s;
 }
 
 input[type="submit"]:hover {
@@ -79,6 +91,12 @@ input[type="submit"]:hover {
 
 /* Keyframe animations */
 @keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes letterFadeIn {
     to {
         opacity: 1;
         transform: translateY(0);

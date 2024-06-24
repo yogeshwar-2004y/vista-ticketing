@@ -1,67 +1,133 @@
 /* General body styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background-color: #000;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    height: 100vh;
+    color: #fff;
+    overflow: auto; /* Allow scrolling */
+}
+
+.container {
+    background-color: #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
     padding: 20px;
-    color: #f406cf;
+    max-width: 100%;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards;
 }
 
 /* Header styling */
-h2 {
+.page-title {
+    color: #fff;
     margin-bottom: 20px;
     font-size: 24px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeIn 1s forwards 0.2s;
 }
 
-/* Table styling */
+.error-message {
+    color: #e74c3c;
+    margin-bottom: 20px;
+    text-align: center;
+    animation: fadeIn 1s forwards;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
-    max-width: 800px;
     border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    margin-top: 20px;
+    animation: fadeIn 1s forwards 0.4s;
 }
 
 th, td {
     padding: 10px;
+    border: 1px solid #444;
     text-align: left;
+    color: #fff;
 }
 
 th {
-    background-color: #4caf50;
-    color: white;
+    background-color: #333;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+td {
+    background-color: #444;
 }
 
-/* Form styling */
-form {
-    background-color: rgba(255, 255, 255, 0.1);
+.action-cell {
+    display: flex;
+    align-items: center;
+}
+
+.delete-form {
+    display: flex;
+    align-items: center;
+}
+
+.passcode-label {
+    margin-right: 10px;
+}
+
+.passcode-input {
+    padding: 5px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #555;
+    color: #fff;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+.update-form {
+    margin-top: 20px;
+    background-color: #333;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-    margin-bottom: 20px; /* Added for better spacing */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    animation: fadeIn 1s forwards 0.6s;
 }
 
 label {
-    font-size: 18px;
-    margin-bottom: 10px;
     display: block;
+    margin-bottom: 10px;
+    color: #fff;
 }
 
-/* Input fields and select styling */
-input[type="number"],
 input[type="text"],
-input[type="password"], /* Added for passcode input */
+input[type="number"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
 select {
     width: calc(100% - 22px);
     padding: 10px;
@@ -69,9 +135,10 @@ select {
     border: none;
     border-radius: 5px;
     outline: none;
+    background-color: #555;
+    color: #fff;
 }
 
-/* Submit button styling */
 input[type="submit"] {
     background-color: #00c853;
     color: #fff;
@@ -87,8 +154,10 @@ input[type="submit"]:hover {
     background-color: #00a844;
 }
 
-/* Error message styling */
-.error-message {
-    color: red;
-    margin-bottom: 20px;
+/* Keyframe animations */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -28,12 +28,17 @@
                     });
                 }
             });
+
+            $('.menu-toggle').click(function() {
+                $('.menu').toggleClass('open');
+            });
         });
     </script>
 </head>
 <body>
     <div class="dashboard-container">
         <div class="menu">
+            <button class="menu-toggle">☰ Menu</button>
             <h3>Menu</h3>
             <button onclick="window.location.href='/itemp'">IT TEAM</button>
             <button onclick="window.location.href='/display'">DISPLAY ALL</button>
@@ -41,7 +46,7 @@
         </div>
         <div class="content">
             <div class="header">
-                <h1>WELCOME<br>Super User!<br>SARAVANAN</h1>
+                <h1>Welcome Super User!<br>SARAVANAN</h1>
             </div>
             <div class="tickets-overview">
                 <h2>Total Tickets - {{ total_tickets }}</h2>
@@ -56,6 +61,7 @@
                             <th>IT Support</th>
                             <th>Resolution</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,6 +75,7 @@
                             <td>{{ row[5] }}</td>
                             <td>{{ row[6] }}</td>
                             <td>{{ row[7] }}</td>
+                            <td><button class="delete-btn" data-index="{{ loop.index0 }}">Delete</button></td>
                         </tr>
                         {% endfor %}
                     </tbody>
