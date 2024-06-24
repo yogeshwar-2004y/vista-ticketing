@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.dashboard-container {
+    display: flex;
+}
+
+.menu {
+    width: 20%;
+    background-color: #ccc;
+    padding: 20px;
+}
+
+.menu h3 {
+    margin-top: 0;
+}
+
+.menu button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.content {
+    width: 80%;
+    padding: 20px;
+}
+
+.header {
+    background-color: #ffcc00;
+    padding: 20px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.tickets-overview {
+    margin-top: 20px;
+}
+
+.tickets-overview h2 {
+    margin-bottom: 20px;
+}
+
+.tickets-overview table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tickets-overview table, .tickets-overview th, .tickets-overview td {
+    border: 1px solid #000;
+}
+
+.tickets-overview th, .tickets-overview td {
+    padding: 10px;
+    text-align: left;
+}

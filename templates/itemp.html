@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Team - Handled Tickets</title>
+    <link rel="stylesheet" href="../static/itemp.css">
+</head>
+<body>
+    <h2>IT Team - Handled Tickets</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>IT Support Member</th>
+                <th>Tickets Handled</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for it_support, tickets in it_team_data.items() %}
+                <tr>
+                    <td>{{ it_support }}</td>
+                    <td>
+                        <ul>
+                            {% for ticket in tickets %}
+                                <li>Employee Name: {{ ticket[0] }}, Employee ID: {{ ticket[1] }}, Issue: {{ ticket[2] }}, Date: {{ ticket[3] }}, Time: {{ ticket[4] }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Directory</title>
+    <link rel="stylesheet" href="../static/total.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Employee Directory</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Index</th>
+                    <th>Employee Name</th>
+                    <th>Employee ID</th>
+                    <th>Role</th>
+                    <th>Action</th> <!-- New column for delete button -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for row_index, row in enumerate(rows, start=1) %}
+                    <tr>
+                        <td>{{ row_index }}</td>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                        <td>
+                            <form action="/delete/{{ row_index }}" method="POST">
+                                <button type="submit" class="delete-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
