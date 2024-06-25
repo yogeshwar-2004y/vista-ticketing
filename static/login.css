@@ -43,7 +43,7 @@ form {
     text-align: center;
     opacity: 0;
     transform: translateY(20px);
-    animation: slideIn 1s forwards 1.5s;
+    animation: slideIn 0.5s forwards 0.5s;
 }
 
 /* Label styling */
