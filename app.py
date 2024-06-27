@@ -7,6 +7,7 @@ from email.mime.text import MIMEText
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+import random
 
 app = Flask(__name__)
 
@@ -14,6 +15,7 @@ USER_TICKETS_FILE = 'employee.xlsx'
 LOGIN_CREDENTIALS_FILE = 'login_credentials.xlsx'
 PASSCODE = "984228"
 
+# Initialize login credentials file if it does not exist
 if not os.path.exists(LOGIN_CREDENTIALS_FILE):
     workbook = Workbook()
     sheet = workbook.active
@@ -31,10 +33,11 @@ if not os.path.exists(LOGIN_CREDENTIALS_FILE):
         sheet.append(row)
     workbook.save(LOGIN_CREDENTIALS_FILE)
 
+# Initialize user tickets file if it does not exist
 if not os.path.exists(USER_TICKETS_FILE):
     workbook = Workbook()
     sheet = workbook.active
-    sheet.append(['Employee Name', 'Employee ID', 'Issue', 'Date', 'Time', 'IT Support', 'Resolution', 'Status'])
+    sheet.append(['Ticket Number', 'Employee Name', 'Employee ID', 'Issue', 'Date', 'Time', 'IT Support', 'Resolution', 'Status'])
     workbook.save(USER_TICKETS_FILE)
 
 def send_email(smtp_server, port, sender, password, recipient, subject, body):
@@ -53,6 +56,13 @@ def send_email(smtp_server, port, sender, password, recipient, subject, body):
         print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {str(e)}")
+
+def generate_unique_ticket_number(sheet):
+    existing_numbers = {row[0] for row in sheet.iter_rows(min_row=2, values_only=True)}
+    while True:
+        ticket_number = random.randint(1000, 9999)
+        if ticket_number not in existing_numbers:
+            return ticket_number
 
 @app.route('/')
 def index():
@@ -91,24 +101,32 @@ def submit():
     date = request.form['edate']
     time = request.form['etime']
     email = request.form['email']
+    
     workbook = load_workbook(USER_TICKETS_FILE)
     sheet = workbook.active
-    sheet.append([employee_name, employee_id, issue, date, time, '', '', 'Open'])
+    ticket_number = generate_unique_ticket_number(sheet)
+    
+    sheet.append([ticket_number, employee_name, employee_id, issue, date, time, '', '', 'Open'])
     workbook.save(USER_TICKETS_FILE)
+    
     subject = "Your Details Received"
-    body = f"Dear {employee_name},\n\nThank you for informing us of your issue: {issue}. We will review your request and get back to you shortly.\n\nBest regards,\nVISTA Engineering Solutions"
+    body = f"Dear {employee_name},\n\nThank you for informing us of your issue: {issue}. Your ticket number is {ticket_number}. We will review your request and get back to you shortly.\n\nBest regards,\nVISTA Engineering Solutions"
+    
     send_email('smtp.gmail.com', 587, 'vistaes17@gmail.com', 'jqelrzqnlpaonqnd', email, subject, body)
+    
     return redirect(url_for('thankyou'))
 
 @app.route('/delete_ticket', methods=['POST'])
 def delete_ticket():
-    index = int(request.form['index'])
+    ticket_number = int(request.form['ticket_number'])
     passcode = request.form['passcode']
     if passcode == PASSCODE:
         workbook = load_workbook(USER_TICKETS_FILE)
         sheet = workbook.active
-        if 1 <= index <= sheet.max_row - 1:
-            sheet.delete_rows(index + 1)
+        for row in sheet.iter_rows(min_row=2):
+            if row[0].value == ticket_number:
+                sheet.delete_rows(row[0].row)
+                break
         workbook.save(USER_TICKETS_FILE)
         return redirect(url_for('itsupport'))
     else:
@@ -130,15 +148,18 @@ def itsupport():
 
 @app.route('/update_ticket', methods=['POST'])
 def update_ticket():
-    index = int(request.form['index'])
+    ticket_number = int(request.form['ticket_number'])
     it_support = request.form['it_support']
     resolution = request.form['resolution']
     status = request.form['status']
     workbook = load_workbook(USER_TICKETS_FILE)
     sheet = workbook.active
-    sheet.cell(row=index + 1, column=6, value=it_support)
-    sheet.cell(row=index + 1, column=7, value=resolution)
-    sheet.cell(row=index + 1, column=8, value=status)
+    for row in sheet.iter_rows(min_row=2):
+        if row[0].value == ticket_number:
+            row[6].value = it_support
+            row[7].value = resolution
+            row[8].value = status
+            break
     workbook.save(USER_TICKETS_FILE)
     return redirect(url_for('thankyou'))
 
@@ -156,18 +177,23 @@ def admin():
     open_count = 0
     closed_count = 0
     for row in rows:
-        if row[7].lower() == 'open':
+        if row[8] is not None and row[8].lower() == 'open':
             open_count += 1
-        elif row[7].lower() == 'closed':
+        elif row[8] is not None and row[8].lower() == 'closed':
             closed_count += 1
+    
     labels = ['Open Tickets', 'Closed Tickets']
     sizes = [open_count, closed_count]
     colors = ['#ff9999', '#66b3ff']
+    
     fig1, ax1 = plt.subplots()
     ax1.pie(sizes, colors=colors, labels=labels, autopct='%1.1f%%', startangle=90)
     ax1.axis('equal')
+    
     pie_chart_filename = 'static/pie_chart.png'
     plt.savefig(pie_chart_filename)
+    plt.close(fig1)
+    
     return render_template('admin.html', rows=rows, columns=columns, pie_chart=pie_chart_filename)
 
 @app.route('/display')
@@ -180,9 +206,9 @@ def display():
     open_count = 0
     closed_count = 0
     for row in rows:
-        if row[7].lower() == 'open':
+        if row[8].lower() == 'open':
             open_count += 1
-        elif row[7].lower() == 'closed':
+        elif row[8].lower() == 'closed':
             closed_count += 1
     labels = ['Open Tickets', 'Closed Tickets']
     sizes = [open_count, closed_count]
@@ -213,30 +239,27 @@ def itemp():
     rows = data[1:]
     it_team_data = {}
     for row in rows:
-        it_support = row[5]
+        it_support = row[6]
         if it_support:
             if it_support not in it_team_data:
                 it_team_data[it_support] = []
-            it_team_data[it_support].append(row[:5])
+            it_team_data[it_support].append(row[:6])
     return render_template('itemp.html', it_team_data=it_team_data)
 
 @app.route('/total')
 def total():
-      # Load existing workbook and sheet
+    # Load existing workbook and sheet
     workbook = load_workbook(LOGIN_CREDENTIALS_FILE)
     sheet = workbook.active
-
     # Read the data from the sheet
     data = list(sheet.values)
     # Assuming the first row contains headers
     columns = data[0]
     rows = data[1:]  # Skip the header row
-
     # Extract only the relevant columns: Name, ID, Role
     relevant_data = []
     for row in rows:
         relevant_data.append((row[0], row[1], row[2]))  # Adjust indices based on your sheet's structure
-
     # Pass the enumerate function to the template
     return render_template('total.html', rows=relevant_data, enumerate=enumerate)
 
@@ -246,11 +269,9 @@ def delete_employee(index):
         # Load existing workbook and sheet
         workbook = load_workbook(LOGIN_CREDENTIALS_FILE)
         sheet = workbook.active
-
         # Read the data from the sheet
         data = list(sheet.values)
         rows = data[1:]  # Skip the header row
-
         # Delete the employee at the specified index
         if index <= len(rows):
             del rows[index - 1]  # Adjust index to match Python's zero-based indexing
@@ -258,13 +279,10 @@ def delete_employee(index):
             sheet = workbook.active
             sheet.delete_rows(index + 1)  # Adjust index to match Excel's one-based indexing
             workbook.save(LOGIN_CREDENTIALS_FILE)
-
         return redirect('/total')
     else:
         # Handle GET request, if needed
         pass
-
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5500', debug=True)

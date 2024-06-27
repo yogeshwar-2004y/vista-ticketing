@@ -10,9 +10,10 @@
         $(document).ready(function() {
             $('.delete-btn').click(function() {
                 var rowIndex = $(this).data('index');
+                var ticketNumber = $(this).data('ticket-number');
                 var confirmation = confirm("Are you sure you want to delete this ticket?");
                 if (confirmation) {
-                    var data = { index: rowIndex, passcode: '984228' };
+                    var data = { ticket_number: ticketNumber, passcode: '984228' };
                     $.ajax({
                         type: "POST",
                         url: "/delete_ticket",
@@ -53,6 +54,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>TICKET NUMBER</th>
                             <th>Employee Name</th>
                             <th>Employee ID</th>
                             <th>Issue</th>
@@ -75,7 +77,10 @@
                             <td>{{ row[5] }}</td>
                             <td>{{ row[6] }}</td>
                             <td>{{ row[7] }}</td>
-                            <td><button class="delete-btn" data-index="{{ loop.index0 }}">Delete</button></td>
+                            <td>{{ row[8] }}</td>
+                            <td>
+                                <button class="delete-btn" data-index="{{ loop.index0 }}" data-ticket-number="{{ row[0] }}">Delete</button>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

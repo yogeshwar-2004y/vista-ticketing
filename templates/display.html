@@ -3,56 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super-Admin Dashboard</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../static/plot.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> <!-- jQuery for optional JS -->
-    <script>
-        $(document).ready(function() {
-    // Add fade-in animation to table rows on page load
-    $('tr').addClass('fadeInRow');
-
-    // Example: Handle delete button click
-    $('.delete-btn').click(function() {
-        var rowIndex = $(this).data('index'); // Get the row index from data attribute
-
-        var confirmation = confirm("Are you sure you want to delete this ticket?");
-        if (confirmation) {
-            // Perform AJAX request or form submission to delete the ticket
-            var data = {
-                index: rowIndex,
-                passcode: '984228'  // Replace with actual passcode or fetch dynamically
-            };
-
-            $.ajax({
-                type: "POST",
-                url: "/delete_ticket",
-                data: data,
-                success: function(response) {
-                    alert('Ticket deleted successfully!');
-                    location.reload(); // Refresh the page after deletion
-                },
-                error: function(error) {
-                    console.error('Error deleting ticket:', error);
-                    alert('Failed to delete ticket. Please try again.');
-                }
-            });
-        }
-    });
-
-    // Example: Handle update button click
-    $('.update-btn').click(function() {
-        var rowIndex = $(this).closest('tr').index() + 1; // Get the row index (1-based)
-
-        // Example: Redirect to update form or open modal for updating ticket details
-        window.location.href = "/update_ticket?index=" + rowIndex;
-    });
-});
-
-    </script> <!-- Custom JavaScript -->
 </head>
 <body>
     <div class="container">
-        <h1>TICKETS</h1>
+        <h1> Dashboard</h1>
 
         <section class="chart-container">
             <h2>Total Tickets Overview</h2>
@@ -64,6 +21,7 @@
             <table id="ticket-table">
                 <thead>
                     <tr>
+                        <th>Ticket Number</th>
                         <th>Employee Name</th>
                         <th>Employee ID</th>
                         <th>Issue</th>
@@ -72,7 +30,6 @@
                         <th>IT Support</th>
                         <th>Resolution</th>
                         <th>Status</th>
-                        <th>Actions</th> <!-- New column for actions -->
                     </tr>
                 </thead>
                 <tbody>
@@ -86,10 +43,8 @@
                         <td>{{ row[5] }}</td>
                         <td>{{ row[6] }}</td>
                         <td>{{ row[7] }}</td>
-                        <td>
-                            <!-- Delete button -->
-                            <button class="delete-btn" data-index="{{ loop.index }}">Delete</button>
-                        </td>
+                        <td>{{ row[8] }}</td>
+                        
                     </tr>
                     {% endfor %}
                 </tbody>

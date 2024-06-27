@@ -15,25 +15,35 @@
         <table>
             <thead>
                 <tr>
-                    <th>Index</th>
-                    {% for column in columns %}
-                        <th>{{ column }}</th>
-                    {% endfor %}
-                    <th>Action</th>
+                    <th>TICKET NUMBER</th>
+                    <th>EMPLOYEE NAME</th>
+                    <th>EMPLOYEE ID</th>
+                    <th>ISSUE</th>
+                    <th>DATE</th>
+                    <th>TIME</th>
+                    <th>IT SUPPORT</th>
+                    <th>RESOLUTION</th>
+                    <th>STATUS</th>
+                    <th>ACTION</th>
                 </tr>
             </thead>
             <tbody>
-                {% for row_index, row in enumerate(rows, start=1) %}
+                {% for row in rows %}
                     <tr>
-                        <td>{{ row_index }}</td>
-                        {% for cell in row %}
-                            <td>{{ cell }}</td>
-                        {% endfor %}
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>{{ row[5] }}</td>
+                        <td>{{ row[6] }}</td>
+                        <td>{{ row[7] }}</td>
+                        <td>{{ row[8] }}</td>
                         <td class="action-cell">
                             <form action="{{ url_for('delete_ticket') }}" method="post" class="delete-form">
-                                <input type="hidden" name="index" value="{{ row_index }}">
-                                <label for="passcode-{{ row_index }}" class="passcode-label">Passcode:</label>
-                                <input type="password" id="passcode-{{ row_index }}" name="passcode" required class="passcode-input">
+                                <input type="hidden" name="ticket_number" value="{{ row[0] }}">
+                                <label for="passcode-{{ row[0] }}" class="passcode-label">Passcode:</label>
+                                <input type="password" id="passcode-{{ row[0] }}" name="passcode" required class="passcode-input">
                                 <input type="submit" value="Delete" class="delete-btn">
                             </form>
                         </td>
@@ -42,8 +52,8 @@
             </tbody>
         </table>
         <form action="{{ url_for('update_ticket') }}" method="post" class="update-form">
-            <label for="index">Ticket Index (Row number in the table above)</label>
-            <input type="number" id="index" name="index" required><br><br>
+            <label for="ticket_number">Ticket Number</label>
+            <input type="number" id="ticket_number" name="ticket_number" required><br><br>
             <label for="it_support">IT Support Member</label>
             <input type="text" id="it_support" name="it_support" required><br><br>
             <label for="resolution">Resolution</label>

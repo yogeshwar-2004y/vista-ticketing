@@ -105,7 +105,8 @@ th {
 
 .update-form {
     margin-top: 20px;
-    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));   
+    background-color:hsl(0, 100%, 96%) ; 
+    color: rgb(0, 0, 0);  
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
@@ -115,7 +116,7 @@ th {
 label {
     display: block;
     margin-bottom: 10px;
-    color: #fff;
+    color: hsl(0, 4%, 5%);
 }
 
 input[type="text"],
@@ -130,7 +131,7 @@ select {
     border: none;
     border-radius: 5px;
     outline: none;
-    color: #fff;
+    color: #000000;
 }
 
 input[type="submit"] {

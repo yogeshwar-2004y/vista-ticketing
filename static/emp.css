@@ -1,115 +1,77 @@
-/* General body styling */
+/* emp.css */
+
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));   
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-    color: rgb(254, 254, 254);
-    overflow: auto; /* Allows scrolling */
+    padding: 0;
 }
 
-/* Container styling */
 .container {
-    background-color: rgba(255, 255, 255, 0.1);
+    width: 50%;
+    margin: 50px auto;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
     text-align: center;
-    opacity: 0;
-    transform: scale(0.9);
-    transition: all 0.5s ease-in-out;
-    position: relative; /* Add this */
+    color: #333;
 }
 
-/* Label styling */
+.employee-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
 label {
-    font-size: 18px;
-    margin-bottom: 10px;
     display: block;
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInLeft 1s forwards;
+    margin-bottom: 8px;
+    color: #555;
 }
 
-/* Input field styling */
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="date"],
-input[type="time"] {
-    width: calc(100% - 22px);
+input[type=text],
+input[type=number],
+input[type=email],
+textarea,
+input[type=date],
+input[type=time] {
+    width: calc(100% - 20px);
     padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-    opacity: 0;
-    transform: translateX(20px);
-    animation: slideInRight 1s forwards;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-input[type="submit"] {
-    background-color: hsl(131, 82%, 41%);
-    color: hwb(0 100% 0%);
-    padding: 10px 20px;
+textarea {
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height of textarea */
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: slideIn 1s forwards;
 }
 
-input[type="submit"]:hover {
-    background-color: #00a844;
+.submit-btn:hover {
+    background-color: #45a049;
 }
 
-/* Keyframe animations */
-@keyframes fadeIn {
-    to {
-        opacity: 1;
+.submit-btn:active {
+    background-color: #3e8e41;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 80%;
     }
 }
-
-@keyframes slideInLeft {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Staggered animation delays */
-label:nth-child(1) { animation-delay: 1.0s; }
-label:nth-child(3) { animation-delay: 1.2s; }
-label:nth-child(5) { animation-delay: 1.4s; }
-label:nth-child(7) { animation-delay: 1.6s; }
-label:nth-child(9) { animation-delay: 1.8s; }
-label:nth-child(11) { animation-delay: 2.0s; }
-
-input:nth-child(2) { animation-delay: 1.1s; }
-input:nth-child(4) { animation-delay: 1.3s; }
-input:nth-child(6) { animation-delay: 1.5s; }
-input:nth-child(8) { animation-delay: 1.7s; }
-input:nth-child(10) { animation-delay: 1.9s; }
-input:nth-child(12) { animation-delay: 2.1s; }
-input[type="submit"] { animation-delay: 2.3s; }
