@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
+    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));   
     font-family: Arial, sans-serif;
   }
   

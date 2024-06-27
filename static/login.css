@@ -10,6 +10,19 @@ body {
     color: #fff;
     overflow: hidden; /* Prevents scroll bars from appearing */
     flex-direction: column;
+    position: relative;
+}
+
+/* Background video styling */
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover; /* Ensure the video covers the entire background */
+    filter: brightness(50%); /* Optional: Add a dark filter to make text more readable */
 }
 
 /* Header styling */

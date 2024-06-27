@@ -3,21 +3,22 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: hsl(0, 2%, 21%);
+    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));
+
 }
 
 .container {
     max-width: 1200px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #1d1a1a;
+    background-color: #eae9e9;
     box-shadow: 0 0 10px hsla(0, 100%, 99%, 0.873);
 }
 
 h1, h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: hsl(0, 100%, 98%);
+    color: hwb(0 48% 5%);
 }
 
 /* Pie chart styling */

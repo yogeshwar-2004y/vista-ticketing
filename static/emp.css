@@ -1,14 +1,14 @@
 /* General body styling */
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right,hsl(0, 0%, 0%),hsl(0, 0%, 0%));
+    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));   
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    color: hsl(108, 91%, 39%);
-    overflow: hidden; /* Prevents scroll bars from appearing */
+    color: rgb(254, 254, 254);
+    overflow: auto; /* Allows scrolling */
 }
 
 /* Container styling */
@@ -22,16 +22,7 @@ body {
     opacity: 0;
     transform: scale(0.9);
     transition: all 0.5s ease-in-out;
-}
-
-/* Header styling */
-h2 {
-    margin-bottom: 20px;
-    font-size: 2em;
-    text-align: center;
-    opacity: 0;
-    animation: fadeIn 1s forwards;
-    animation-delay: 0.5s;
+    position: relative; /* Add this */
 }
 
 /* Label styling */
@@ -62,8 +53,8 @@ input[type="time"] {
 }
 
 input[type="submit"] {
-    background-color: #00c853;
-    color: #fff;
+    background-color: hsl(131, 82%, 41%);
+    color: hwb(0 100% 0%);
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
