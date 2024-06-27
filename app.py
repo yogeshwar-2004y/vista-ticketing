@@ -60,7 +60,7 @@ def send_email(smtp_server, port, sender, password, recipient, subject, body):
 def generate_unique_ticket_number(sheet):
     existing_numbers = {row[0] for row in sheet.iter_rows(min_row=2, values_only=True)}
     while True:
-        ticket_number = random.randint(1000, 9999)
+        ticket_number = random.randint(0000, 9999)
         if ticket_number not in existing_numbers:
             return ticket_number
 
