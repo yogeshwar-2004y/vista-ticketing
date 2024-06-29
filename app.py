@@ -206,10 +206,13 @@ def display():
     open_count = 0
     closed_count = 0
     for row in rows:
-        if row[8].lower() == 'open':
-            open_count += 1
-        elif row[8].lower() == 'closed':
-            closed_count += 1
+        # Ensure the row has enough columns and the column value is not None
+        if len(row) > 8 and row[8] is not None:
+            status = row[8].lower()
+            if status == 'open':
+                open_count += 1
+            elif status == 'closed':
+                closed_count += 1
     labels = ['Open Tickets', 'Closed Tickets']
     sizes = [open_count, closed_count]
     colors = ['#ff9999', '#66b3ff']

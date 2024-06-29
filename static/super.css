@@ -1,126 +1,117 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     margin: 0;
-    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars from appearing */
+    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));   
 
 }
 
 .dashboard-container {
     display: flex;
+    flex-direction: column;
     height: 100vh;
-    overflow: hidden;
+    
 }
 
 .menu {
-    background-color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #333;
     color: white;
-    width: 60px;
-    transition: width 0.3s;
-    overflow: hidden;
-    position: relative;
+    width: 250px;
+    height: 100vh;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+    z-index: 1000;
 }
 
 .menu.open {
-    width: 250px;
-}
-
-.menu h3, .menu button:not(.menu-toggle) {
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s linear;
-}
-
-.menu.open h3, .menu.open button {
-    visibility: visible;
-    opacity: 1;
-}
-
-.menu h3 {
-    margin: 0;
-    padding: 15px;
-    text-align: center;
-    background-color: #444;
-}
-
-.menu button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    border: none;
-    background-color: #333;
-    color: white;
-    text-align: left;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.menu button:hover {
-    background-color: rgb(212, 147, 255);
+    transform: translateX(0);
 }
 
 .menu-toggle {
-    background-color: #333;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #333;
     color: white;
     border: none;
-    width: 100%;
-    padding: 10px;
+    padding: 10px 20px;
     cursor: pointer;
-    visibility: visible;
-    opacity: 1;
+    z-index: 1100;
+}
+
+.menu-content {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.menu-content h3 {
+    margin-top: 0;
+}
+
+.menu-content button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-content button:hover {
+    background: #555;
 }
 
 .content {
-    flex-grow: 1;
+    flex: 1;
     padding: 20px;
-    background: linear-gradient(to right,rgb(184, 16, 81),hwb(171 1% 41%));
-
+    margin-left: 50px; /* Give some margin to avoid overlap with menu toggle button */
+    overflow-y: auto;
 }
 
-.header {
-    text-align: center;
-    padding: 20px;
-    background-color: #ffffff;
-    color: rgb(214, 70, 159);
-    margin-bottom: 20px;
-}
-
-.tickets-overview {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.header h1 {
+    margin: 40px 20px 20px 0;
 }
 
 .tickets-overview h2 {
-    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.table-container {
+    overflow-y: auto;
+    max-height: 80vh; /* Adjust this value as needed */
+    background-color: #f2f2f2;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
 table th, table td {
-    padding: 10px;
     border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
 }
 
 table th {
-    background-color: #333;
-    color: white;
+    background-color: #f2f2f2;
 }
 
 .delete-btn {
-    background-color: #e74c3c;
+    background: red;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 4px;
 }
 
 .delete-btn:hover {
-    background-color: #c0392b;
+    background: darkred;
 }

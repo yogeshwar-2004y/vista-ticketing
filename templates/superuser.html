@@ -38,53 +38,57 @@
 </head>
 <body>
     <div class="dashboard-container">
+        <button class="menu-toggle">☰ Menu</button> <!-- Ensure this button is correctly placed and visible -->
         <div class="menu">
-            <button class="menu-toggle">☰ Menu</button>
-            <h3>Menu</h3>
-            <button onclick="window.location.href='/itemp'">IT TEAM</button>
-            <button onclick="window.location.href='/display'">DISPLAY ALL</button>
-            <button onclick="window.location.href='/total'">Employees</button>
+            <div class="menu-content">
+                <h3>Menu</h3>
+                <button onclick="window.location.href='/itemp'">IT TEAM</button>
+                <button onclick="window.location.href='/display'">DISPLAY ALL</button>
+                <button onclick="window.location.href='/total'">Employees</button>
+            </div>
         </div>
         <div class="content">
-            <div class="header">
-                <h1>Welcome Super User!<br>SARAVANAN</h1>
-            </div>
+                    <div class="header">
+                          <h1>Welcome Super User!<br>SARAVANAN</h1>
+                    </div>
             <div class="tickets-overview">
                 <h2>Total Tickets - {{ total_tickets }}</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>TICKET NUMBER</th>
-                            <th>Employee Name</th>
-                            <th>Employee ID</th>
-                            <th>Issue</th>
-                            <th>Date</th>
-                            <th>Time</th>
-                            <th>IT Support</th>
-                            <th>Resolution</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in rows %}
-                        <tr>
-                            <td>{{ row[0] }}</td>
-                            <td>{{ row[1] }}</td>
-                            <td>{{ row[2] }}</td>
-                            <td>{{ row[3] }}</td>
-                            <td>{{ row[4] }}</td>
-                            <td>{{ row[5] }}</td>
-                            <td>{{ row[6] }}</td>
-                            <td>{{ row[7] }}</td>
-                            <td>{{ row[8] }}</td>
-                            <td>
-                                <button class="delete-btn" data-index="{{ loop.index0 }}" data-ticket-number="{{ row[0] }}">Delete</button>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>TICKET NUMBER</th>
+                                <th>Employee Name</th>
+                                <th>Employee ID</th>
+                                <th>Issue</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>IT Support</th>
+                                <th>Resolution</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                            <tr>
+                                <td>{{ row[0] }}</td>
+                                <td>{{ row[1] }}</td>
+                                <td>{{ row[2] }}</td>
+                                <td>{{ row[3] }}</td>
+                                <td>{{ row[4] }}</td>
+                                <td>{{ row[5] }}</td>
+                                <td>{{ row[6] }}</td>
+                                <td>{{ row[7] }}</td>
+                                <td>{{ row[8] }}</td>
+                                <td>
+                                    <button class="delete-btn" data-index="{{ loop.index0 }}" data-ticket-number="{{ row[0] }}">Delete</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
