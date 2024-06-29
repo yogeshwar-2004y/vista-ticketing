@@ -21,13 +21,13 @@ if not os.path.exists(LOGIN_CREDENTIALS_FILE):
     sheet = workbook.active
     sheet.append(['Employee Name', 'Employee ID', 'Role'])
     sample_data = [
-        ['Frank', 101, 'employee'],
-        ['Alice', 102, 'employee'],
-        ['Bob', 103, 'itsupport'],
-        ['Charlie', 104, 'employee'],
-        ['Dave', 105, 'itsupport'],
-        ['Yogesh', 106, 'admin'],
-        ['Saravanan', 107, 'superuser'],  # Adding superuser
+        ['Frank', 'VISTA0001', 'employee'],
+        ['Alice', 'VISTA0002', 'employee'],
+        ['Bob', 'VISTA0003', 'itsupport'],
+        ['Charlie', 'VISTA0004', 'employee'],
+        ['Dave', 'VISTA0005', 'itsupport'],
+        ['Yogeshwar.s', 'VISTA0001', 'admin'],
+        ['Saravanan', 'VISTAMS001', 'superuser'],  # Adding superuser
     ]
     for row in sample_data:
         sheet.append(row)
@@ -60,7 +60,7 @@ def send_email(smtp_server, port, sender, password, recipient, subject, body):
 def generate_unique_ticket_number(sheet):
     existing_numbers = {row[0] for row in sheet.iter_rows(min_row=2, values_only=True)}
     while True:
-        ticket_number = random.randint(0000, 9999)
+        ticket_number = random.randint(0, 9999)
         if ticket_number not in existing_numbers:
             return ticket_number
 
@@ -71,7 +71,7 @@ def index():
 @app.route('/login', methods=['POST'])
 def login():
     employee_name = request.form['ename']
-    credential_id = int(request.form['eid'])
+    credential_id = request.form['eid']  # Treat as string
     workbook = load_workbook(LOGIN_CREDENTIALS_FILE)
     sheet = workbook.active
     for row in sheet.iter_rows(min_row=2, values_only=True):
@@ -206,7 +206,6 @@ def display():
     open_count = 0
     closed_count = 0
     for row in rows:
-        # Ensure the row has enough columns and the column value is not None
         if len(row) > 8 and row[8] is not None:
             status = row[8].lower()
             if status == 'open':
@@ -251,40 +250,27 @@ def itemp():
 
 @app.route('/total')
 def total():
-    # Load existing workbook and sheet
     workbook = load_workbook(LOGIN_CREDENTIALS_FILE)
     sheet = workbook.active
-    # Read the data from the sheet
     data = list(sheet.values)
-    # Assuming the first row contains headers
     columns = data[0]
-    rows = data[1:]  # Skip the header row
-    # Extract only the relevant columns: Name, ID, Role
-    relevant_data = []
-    for row in rows:
-        relevant_data.append((row[0], row[1], row[2]))  # Adjust indices based on your sheet's structure
-    # Pass the enumerate function to the template
+    rows = data[1:]
+    relevant_data = [(row[0], row[1], row[2]) for row in rows]
     return render_template('total.html', rows=relevant_data, enumerate=enumerate)
 
 @app.route('/delete/<int:index>', methods=['GET', 'POST'])
 def delete_employee(index):
     if request.method == 'POST':
-        # Load existing workbook and sheet
         workbook = load_workbook(LOGIN_CREDENTIALS_FILE)
         sheet = workbook.active
-        # Read the data from the sheet
         data = list(sheet.values)
-        rows = data[1:]  # Skip the header row
-        # Delete the employee at the specified index
+        rows = data[1:]
         if index <= len(rows):
-            del rows[index - 1]  # Adjust index to match Python's zero-based indexing
-            # Update the Excel file
-            sheet = workbook.active
-            sheet.delete_rows(index + 1)  # Adjust index to match Excel's one-based indexing
+            del rows[index - 1]
+            sheet.delete_rows(index + 1)
             workbook.save(LOGIN_CREDENTIALS_FILE)
         return redirect('/total')
     else:
-        # Handle GET request, if needed
         pass
 
 if __name__ == '__main__':

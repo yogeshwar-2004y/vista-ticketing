@@ -71,7 +71,7 @@ label {
 
 /* Input field styling */
 input[type="text"],
-input[type="number"] {
+input[type="text"] {
     width: calc(100% - 22px);
     padding: 10px;
     margin-bottom: 20px;
