@@ -3,7 +3,7 @@ from openpyxl import Workbook, load_workbook
 import os
 import smtplib
 from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
+from email.mime.text import  MIMEText
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -11,8 +11,8 @@ import random
 
 app = Flask(__name__)
 
-USER_TICKETS_FILE = 'employee.xlsx'
-LOGIN_CREDENTIALS_FILE = 'login_credentials.xlsx'
+USER_TICKETS_FILE = 'xlsx/employee.xlsx'
+LOGIN_CREDENTIALS_FILE = 'xlsx/login_credentials.xlsx'
 PASSCODE = "984228"
 
 # Initialize login credentials file if it does not exist
@@ -274,4 +274,4 @@ def delete_employee(index):
         pass
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5500', debug=True)
+    app.run(host='0.0.0.0', port='5000', debug=True)
